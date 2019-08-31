@@ -1,9 +1,14 @@
-class MyMaxHeap{
+class MyHeap{
     private int[] store;
     private int cap = 5;
     private int size = 1;
-    public MyMaxHeap(){
+    private int type;
+
+    //0 = minheap, 1 = maxheap
+
+    public MyHeap(int flag){
         this.store = new int[cap];
+        this.type = flag;
     }
     void insert(int x){
         if(size >= store.length-1)
@@ -33,11 +38,28 @@ class MyMaxHeap{
             max_heapify(largest);
         }
     }
+    void min_heapify(int i){
+        int left = 2*i;
+        int right = 2*i+1;
+
+        int smallest = i;
+        if(left < size && store[i] > store[left])
+            smallest = left;
+        if(right < size && store[smallest] > store[right])
+            smallest = right;
+        if(smallest != i){
+            swap(smallest, i);
+            min_heapify(smallest);
+        }
+    }
     void heapify(){
         for(int i=(size-1)/2;i>=1;i--)
-            max_heapify(i);
+            if(type == 0)
+                min_heapify(i);
+            else
+                max_heapify(i);
     }
-    int returnMax(){
+    int getRoot(){
         return this.store[1];
     }
     void display(){
@@ -51,14 +73,14 @@ class MyMaxHeap{
         store[b] = temp; 
     }
 }
-public class MyMaxHeapI{
+public class MyHeapI{
     public static void main(String args[]){
-        MyMaxHeap mmh = new MyMaxHeap();
-        for(int i=1;i<=5;i++)
-            mmh.insert(i);
-        mmh.display();
-        mmh.heapify();
-        System.out.println("Root element: "+mmh.returnMax());
-        mmh.display();
+        MyHeap mh = new MyHeap(0);
+        for(int i=5;i>=1;i--)
+            mh.insert(i);
+        mh.display();
+        mh.heapify();
+        System.out.println("Root element: "+mh.getRoot());
+        mh.display();
     }
 }
