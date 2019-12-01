@@ -49,11 +49,7 @@ public class Sorting{
 
 
     public static void main(String args[]){
-        Integer[] a = {3, 2, 1, 6, 1, 8};
-        Sorting.insertion_sort(a);
-
-        for(Integer i:a)
-            System.out.println(i);
+       
     }
 
 
