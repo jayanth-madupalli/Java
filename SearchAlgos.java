@@ -12,6 +12,8 @@ public class SearchAlgos{
             System.out.println("Element not found.");
         else
             System.out.println("Element found at position: "+(pos+1));
+
+        sc.close();
     }
 
     static int  bsearch(int[] arr, int k){
