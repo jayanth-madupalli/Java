@@ -1,11 +1,20 @@
 import java.util.LinkedList;
 public class Graph{
-    // Implementation of Undirected Graph
     private final int V; // number of vertices
     private LinkedList<Integer>[] adj; //adjancey list
-
+    private boolean isDigraph = false;
     public Graph(int V){
+        // Implementation of Undirected Graph
         this.V = V;
+        adj = (LinkedList<Integer>[]) new LinkedList[V];
+        for(int v=0; v<V; v++)
+            adj[v] = new LinkedList<Integer>();
+    }
+
+    public Graph(int V, boolean isDigraph){
+        // Implementation of Directed Graph
+        this.V = V;
+        this.isDigraph = isDigraph;
         adj = (LinkedList<Integer>[]) new LinkedList[V];
         for(int v=0; v<V; v++)
             adj[v] = new LinkedList<Integer>();
@@ -13,7 +22,8 @@ public class Graph{
 
     public void addEdge(int v, int w){
         adj[v].add(w);
-        adj[w].add(v);
+        if(!this.isDigraph)
+            adj[w].add(v);
     }
 
     public int getV(){
